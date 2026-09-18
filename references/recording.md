@@ -10,7 +10,9 @@ Each file snapshot includes a SHA-256 hash. Import validates those hashes, event
 
 The `.local.json` companion contains the working-copy location and is needed to continue capturing or to locate the default export destination. It is not needed for playback and must stay local. A finished `.jsonl` can be exported without its companion by supplying `export --session <file> --out <destination>` explicitly.
 
-For PR playback, finish the session and export to `.chronosphere/replay.jsonl` at the target repository root, then commit that artifact when sharing it is requested. Keep raw logs ignored using the rules in SKILL.md. Chronosphere reads that conventional path from the PR head commit. Alternatively, open the PR in Chronosphere and choose Attach recording. Manual attachments need reattaching after refresh; review drafts persist. The standalone `/recordings` view supports local inspection without GitHub authentication.
+For gist-linked PR playback, follow the explicit consent and publication steps in SKILL.md. Upload only `replay.jsonl`, verify the gist is secret, pin its revision, and append one `chronosphere-replay: <gist-url>` line to the PR description. Raw gist playback is limited to 10 MB. Anyone with the link can read a secret gist.
+
+For committed PR playback, finish the session and export to `.chronosphere/replay.jsonl` at the target repository root, then commit that artifact when sharing it is requested. Keep raw logs ignored using the rules in SKILL.md. Chronosphere reads that conventional path from the PR head commit. Alternatively, open the PR in Chronosphere and choose Attach recording. Manual attachments need reattaching after refresh; review drafts persist. The standalone `/recordings` view supports local inspection without GitHub authentication.
 
 ## Boundaries
 

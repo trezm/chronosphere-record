@@ -16,7 +16,15 @@ Requires **Node 22.13+ and Git**. No npm install, API key, or remote MCP service
 
 Ask your agent to use `chronosphere-record` while making code changes. It starts a local session before editing, records checkpoints after coherent changes, captures check results, and finishes the recording.
 
-To share the result with a PR, ask the agent to export the finished log to **`.chronosphere/replay.jsonl`** at the target repository root and commit it with the changes. You can instead attach the `.jsonl` manually when opening the PR in Chronosphere.
+When a recording is ready to share with a PR, the skill asks whether you want to upload it as a **secret GitHub gist**. If you approve, it uploads `replay.jsonl`, pins its revision, and appends this line to the PR description:
+
+```text
+chronosphere-replay: https://gist.github.com/<owner>/<gist-id>/<revision>
+```
+
+Secret means unlisted, not private: anyone with the URL can read the replay, even if the PR is private. The agent waits for explicit consent before uploading. Posting requires GitHub CLI authentication with gist permission; local recording still needs no API access. Gist playback supports logs up to 10 MB.
+
+If you decline, the replay stays local. You can choose to commit **`.chronosphere/replay.jsonl`** instead or attach the `.jsonl` manually when opening the PR. Those options support logs up to 20 MB. Gist tags require a Chronosphere deployment that supports gist-linked recordings.
 
 The recorder captures requested checkpoints, not every intermediate edit or private model reasoning. Recordings include source text and command output; raw sessions stay local until you choose to share them.
 
